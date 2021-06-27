@@ -48,6 +48,7 @@ namespace SKMapGenerator.Ultima
             return ref _staticBlocks[(x >> 3) * BlockHeight + (y >> 3)];
         }
 
+        [Obsolete("Use GetStaticBlock instead")]
         public ref Static GetStaticTile(int x, int y)
         {
             ref StaticBlock block = ref GetStaticBlock(x, y);
