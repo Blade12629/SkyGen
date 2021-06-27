@@ -389,7 +389,7 @@ namespace SKMapGenerator
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
-            this.Text = "SKMapGen";
+            this.Text = "SkyGen";
             ((System.ComponentModel.ISupportInitialize)(this.NUMMapIndex)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
