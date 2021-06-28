@@ -58,8 +58,6 @@ namespace SKMapGenerator
             this.TBStatics = new System.Windows.Forms.TextBox();
             this.BTNStatics = new System.Windows.Forms.Button();
             this.CBStatics = new System.Windows.Forms.CheckBox();
-            this.BTTilemapAcoFile = new System.Windows.Forms.Button();
-            this.BTHeightmapAcoFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NUMMapIndex)).BeginInit();
             this.SuspendLayout();
             // 
@@ -331,34 +329,12 @@ namespace SKMapGenerator
             this.CBStatics.UseVisualStyleBackColor = true;
             this.CBStatics.CheckedChanged += new System.EventHandler(this.CBStatics_CheckedChanged);
             // 
-            // BTTilemapAcoFile
-            // 
-            this.BTTilemapAcoFile.Location = new System.Drawing.Point(244, 228);
-            this.BTTilemapAcoFile.Name = "BTTilemapAcoFile";
-            this.BTTilemapAcoFile.Size = new System.Drawing.Size(86, 21);
-            this.BTTilemapAcoFile.TabIndex = 26;
-            this.BTTilemapAcoFile.Text = "To .aco file";
-            this.BTTilemapAcoFile.UseVisualStyleBackColor = true;
-            this.BTTilemapAcoFile.Click += new System.EventHandler(this.BTTilemapAcoFile_Click);
-            // 
-            // BTHeightmapAcoFile
-            // 
-            this.BTHeightmapAcoFile.Location = new System.Drawing.Point(244, 101);
-            this.BTHeightmapAcoFile.Name = "BTHeightmapAcoFile";
-            this.BTHeightmapAcoFile.Size = new System.Drawing.Size(86, 21);
-            this.BTHeightmapAcoFile.TabIndex = 27;
-            this.BTHeightmapAcoFile.Text = "To .aco file";
-            this.BTHeightmapAcoFile.UseVisualStyleBackColor = true;
-            this.BTHeightmapAcoFile.Click += new System.EventHandler(this.BTHeightmapAcoFile_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(648, 426);
-            this.Controls.Add(this.BTHeightmapAcoFile);
-            this.Controls.Add(this.BTTilemapAcoFile);
             this.Controls.Add(this.CBStatics);
             this.Controls.Add(this.BTNStatics);
             this.Controls.Add(this.label8);
@@ -427,8 +403,6 @@ namespace SKMapGenerator
         private System.Windows.Forms.TextBox TBStatics;
         private System.Windows.Forms.Button BTNStatics;
         private System.Windows.Forms.CheckBox CBStatics;
-        private System.Windows.Forms.Button BTTilemapAcoFile;
-        private System.Windows.Forms.Button BTHeightmapAcoFile;
     }
 }
 

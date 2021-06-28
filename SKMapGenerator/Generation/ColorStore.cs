@@ -81,15 +81,6 @@ namespace SKMapGenerator.Generation
             w.Flush();
         }
 
-        public void SaveAsACO(string path)
-        {
-            using (Adobe.ACOWriter aco = new Adobe.ACOWriter(path))
-            {
-                Dictionary<Color, string> acoDict = _storage.ToDictionary(p => p.Key, p => p.Value.ToString());
-                aco.WritePalette(acoDict);
-            }
-        }
-
         public void Load(string path)
         {
             using System.IO.FileStream fstream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);

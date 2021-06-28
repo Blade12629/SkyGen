@@ -327,23 +327,5 @@ namespace SKMapGenerator
         {
             _applyStatics = CBStatics.Checked;
         }
-
-        private void BTHeightmapAcoFile_Click(object sender, EventArgs e)
-        {
-            ColorStore cs = new ColorStore(255);
-            cs.Load(_heightMapCSPath);
-            cs.SaveAsACO($"{_heightMapCSPath}.aco");
-
-            WriteLineOut($"Saved heightmap colorstore to {_heightMapCSPath}.aco");
-        }
-
-        private void BTTilemapAcoFile_Click(object sender, EventArgs e)
-        {
-            ColorStore cs = new ColorStore(255);
-            cs.Load(_tileMapPath);
-            cs.SaveAsACO($"{_tileMapCSPath}.aco");
-
-            WriteLineOut($"Saved tilemap colorstore to {_tileMapCSPath}.aco");
-        }
     }
 }
