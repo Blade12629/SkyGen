@@ -24,6 +24,31 @@ namespace SKMapGenerator.Generation
                 }
             }
         }
+
+        public void Export(ColorStore cs, TileMatrix tileMatrix, string file)
+        {
+            Dictionary<int, Color> reversedCS = cs.Storage.ToDictionary(e => e.Value, e => e.Key);
+            Bitmap bmp = new Bitmap(tileMatrix.Width, tileMatrix.Height);
+
+            for (int x = 0; x < tileMatrix.Width; x++)
+            {
+                for (int y = 0; y < tileMatrix.Height; y++)
+                {
+                    ref var tile = ref tileMatrix.GetTile(x, y);
+
+                    if (reversedCS.TryGetValue(tile.Z, out Color color))
+                    {
+                        bmp.SetPixel(x, y, color);
+                    }
+                    else
+                    {
+                        bmp.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            bmp.Save(file);
+        }
     }
 
     public class TileMapGenerator : IGenerator
@@ -41,6 +66,31 @@ namespace SKMapGenerator.Generation
                     tile.TileId = tileId;
                 }
             }
+        }
+
+        public void Export(ColorStore cs, TileMatrix tileMatrix, string file)
+        {
+            Dictionary<int, Color> reversedCS = cs.Storage.ToDictionary(e => e.Value, e => e.Key);
+            Bitmap bmp = new Bitmap(tileMatrix.Width, tileMatrix.Height);
+
+            for (int x = 0; x < tileMatrix.Width; x++)
+            {
+                for (int y = 0; y < tileMatrix.Height; y++)
+                {
+                    ref var tile = ref tileMatrix.GetTile(x, y);
+
+                    if (reversedCS.TryGetValue(tile.TileId, out Color color))
+                    {
+                        bmp.SetPixel(x, y, color);
+                    }
+                    else
+                    {
+                        bmp.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            bmp.Save(file);
         }
     }
 }

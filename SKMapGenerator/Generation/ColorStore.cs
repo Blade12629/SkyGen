@@ -9,6 +9,8 @@ namespace SKMapGenerator.Generation
 {
     public class ColorStore
     {
+        public IReadOnlyDictionary<Color, int> Storage => _storage;
+
         Dictionary<Color, int> _storage;
 
         public ColorStore(int startCapacity)
@@ -27,6 +29,64 @@ namespace SKMapGenerator.Generation
             {
                 Update(color, value);
             }
+        }
+
+        public static ColorStore GetReverseHeightCS()
+        {
+            int r = 0;
+            int g = 0;
+            int b = 0;
+
+            ColorStore result = new ColorStore(255 + 254);
+            for (int z = -200; z < 255; z++)
+            {
+                r += 5;
+
+                if (r >= 255)
+                {
+                    r = 0;
+                    g += 5;
+
+                    if (g >= 255)
+                    {
+                        g = 0;
+                        b += 5;
+                    }
+                }
+
+                result.Add(Color.FromArgb(r, g, b), z);
+            }
+
+            return result;
+        }
+
+        public static ColorStore GetReverseTileCS()
+        {
+            int r = 0;
+            int g = 0;
+            int b = 0;
+
+            ColorStore result = new ColorStore(255 + 254);
+            for (int id = 0; id < 512; id++)
+            {
+                r += 5;
+
+                if (r >= 255)
+                {
+                    r = 0;
+                    g += 5;
+
+                    if (g >= 255)
+                    {
+                        g = 0;
+                        b += 5;
+                    }
+                }
+
+                result.Add(Color.FromArgb(r, g, b), id);
+            }
+
+            return result;
         }
 
 #if DEBUG

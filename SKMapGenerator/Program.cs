@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SKMapGenerator.Generation;
+using SKMapGenerator.Ultima;
 
 namespace SKMapGenerator
 {
@@ -15,7 +17,19 @@ namespace SKMapGenerator
         [STAThread]
         static void Main()
         {
-            Environment.Exit(0);
+            //ColorStore csHeights = ColorStore.GetReverseHeightCS();
+            //ColorStore csTiles = ColorStore.GetReverseTileCS();
+
+            //TileMatrix matrix = new TileMatrix(@"D:\Electronic Arts\ClassicUO\map0.mul", 7168, 4096);
+            //matrix.Load();
+
+            //TileMapGenerator gen = new TileMapGenerator();
+            //gen.Export(csTiles, matrix, @"D:\reposSSD\SKUOEdit\Test\reversedTiles.bmp");
+
+            //HeightMapGenerator gen2 = new HeightMapGenerator();
+            //gen2.Export(csHeights, matrix, @"D:\reposSSD\SKUOEdit\Test\reversedHeights.bmp");
+
+            //Environment.Exit(0);
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

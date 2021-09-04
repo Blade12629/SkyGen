@@ -88,28 +88,30 @@ namespace SKMapGenerator.Ultima
             {
                 Open();
 
-                using BinaryReader reader = new BinaryReader(_stream);
-                List<TileBlock> tileBlocks = new List<TileBlock>();
-
-                int lengthPerBlock = 4 + (64 * 3);
-
-                while(_stream.Position + lengthPerBlock < _stream.Length)
+                using (BinaryReader reader = new BinaryReader(_stream))
                 {
-                    int header = reader.ReadInt32();
-                    Tile[] tiles = new Tile[64];
+                    List<TileBlock> tileBlocks = new List<TileBlock>();
 
-                    for (int i = 0; i < tiles.Length; i++)
+                    int lengthPerBlock = 4 + (64 * 3);
+
+                    while (_stream.Position + lengthPerBlock <= _stream.Length)
                     {
-                        short id = reader.ReadInt16();
-                        sbyte z = reader.ReadSByte();
+                        int header = reader.ReadInt32();
+                        Tile[] tiles = new Tile[64];
 
-                        tiles[i] = new Tile(id, z);
+                        for (int i = 0; i < tiles.Length; i++)
+                        {
+                            short id = reader.ReadInt16();
+                            sbyte z = reader.ReadSByte();
+
+                            tiles[i] = new Tile(id, z);
+                        }
+
+                        tileBlocks.Add(new TileBlock(header, tiles));
                     }
 
-                    tileBlocks.Add(new TileBlock(header, tiles));
+                    _tileBlocks = tileBlocks.ToArray();
                 }
-
-                _tileBlocks = tileBlocks.ToArray();
             }
             finally
             {
@@ -123,26 +125,28 @@ namespace SKMapGenerator.Ultima
             {
                 Create();
 
-                using BinaryWriter writer = new BinaryWriter(_stream);
-                TileBlock[] blocks = _tileBlocks;
-
-                for (int i = 0; i < blocks.Length; i++)
+                using (BinaryWriter writer = new BinaryWriter(_stream))
                 {
-                    ref TileBlock block = ref blocks[i];
-                    Tile[] tiles = block.Tiles;
+                    TileBlock[] blocks = _tileBlocks;
 
-                    writer.Write(block.Header);
-
-                    for (int x = 0; x < tiles.Length; x++)
+                    for (int i = 0; i < blocks.Length; i++)
                     {
-                        ref Tile tile = ref tiles[x];
+                        ref TileBlock block = ref blocks[i];
+                        Tile[] tiles = block.Tiles;
 
-                        writer.Write(tile.TileId);
-                        writer.Write(tile.Z);
+                        writer.Write(block.Header);
+
+                        for (int x = 0; x < tiles.Length; x++)
+                        {
+                            ref Tile tile = ref tiles[x];
+
+                            writer.Write(tile.TileId);
+                            writer.Write(tile.Z);
+                        }
                     }
-                }
 
-                writer.Flush();
+                    writer.Flush();
+                }
             }
             finally
             {
@@ -211,7 +215,12 @@ namespace SKMapGenerator.Ultima
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(TileId, X, Y, Z);
+            int hashCode = -59855996;
+            hashCode = hashCode * -1521134295 + TileId.GetHashCode();
+            hashCode = hashCode * -1521134295 + X.GetHashCode();
+            hashCode = hashCode * -1521134295 + Y.GetHashCode();
+            hashCode = hashCode * -1521134295 + Z.GetHashCode();
+            return hashCode;
         }
 
         public static bool operator ==(Static left, Static right)
